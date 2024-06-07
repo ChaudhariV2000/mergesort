@@ -1,0 +1,75 @@
+//package AOA;
+
+//AlgoExpertDude
+import java.util.Scanner;
+
+public class MergeSort {
+    static Scanner sc = new Scanner(System.in);
+    static int[] arr = new int[] { 4, 2, 7, 1, 5, 9, 8, 3, 0 };
+    static int[] Merge_arr = new int[10];
+//-----------------logic -----------------
+    static void Merge_Sort(int l, int mid, int h) {
+        int i = l;
+        int j = mid + 1;
+        int k = l;
+
+        while (i <= mid && j <= h) {
+            if (arr[i] <= arr[j]) {
+                Merge_arr[k++] = arr[i++];
+            } else {
+                Merge_arr[k++] = arr[j++];
+
+            }
+
+        }
+
+        if (i > mid) {
+            while (j <= h) {
+                Merge_arr[k++] = arr[j++];
+            }
+        } else {
+            while (i <= mid) {
+                Merge_arr[k] = arr[i];
+                i++;
+                k++;
+
+            }
+        }
+
+        for (k = l; k <= h; k++) {
+            arr[k] = Merge_arr[k];
+
+        }
+
+    }
+//--------------divide---------
+    static void Merge(int l, int h) {
+        if (l < h) {
+            int mid = (int) Math.floor((l + h) / 2);
+
+            Merge(l, mid);
+            Merge(mid + 1, h);
+            Merge_Sort(l, mid, h);
+
+        }
+
+    }
+//----------print------------
+    static void print() {
+        int i;
+        System.out.println("\nSorted Array");
+        for (i = 0; i < 9; i++) {
+            System.out.print("\t" + arr[i]);
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int h = arr.length - 1;
+        int l = 0;
+        Merge(l, h);
+        print();
+
+    }
+
+}
